@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component {
     state = {
-        imageUrl: "",
         name: "",
         price: 0,
+        img: "",
     };
 
     constructor() {
@@ -13,30 +14,34 @@ class Form extends Component {
         this.handleImageChange = this.handleImageChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.resetForm = this.resetForm.bind(this);
     };
 
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
                     <input 
                         type="text" 
-                        value={this.state.imageUrl} 
-                        onChange={this.handleImageChange} />
-                    <input 
-                        type="text" 
+                        placeholder="Product Name"
                         value={this.state.name}
                         onChange={this.handleNameChange} />
                     <input 
                         type="number" 
+                        placeholder="Price"
                         value={this.state.price}
                         onChange={this.handlePriceChange} />
+                    <input 
+                        type="text" 
+                        placeholder="Image URL"
+                        value={this.state.img} 
+                        onChange={this.handleImageChange} />
                     <button 
                         type= "button"
                         onClick={this.resetForm}>Cancel</button>
                     <button
-                        // type="submit"
+                        type="submit"
                         >Add to Inventory</button>
                 </form>
             </div>
@@ -45,7 +50,7 @@ class Form extends Component {
 
     handleImageChange(event) {
         this.setState({
-            imageUrl: event.target.value,
+            img: event.target.value,
         });
     }
 
@@ -65,13 +70,23 @@ class Form extends Component {
         event.preventDefault();
 
         this.setState({
-            imageUrl: "",
             name: "",
             price: 0,
+            img: "",
         });
     }
 
-    // addToInventory()
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const { name, price, img } = this.state;
+
+        axios.post('http://localhost:8000/api/products', {
+            name,
+            price,
+            img,
+        });
+    }
 }
 
 export default Form;

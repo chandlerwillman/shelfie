@@ -4,33 +4,32 @@ import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Form from './Components/Form/Form';
 import Header from './Components/Header/Header';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      inventory: [
-        {
-          name: "Nest Thermostat",
-          imageURL: "https://nest.com/support/images/misc-nest-thermostat/3rd-gen/nest-thermostat-gen3-time-to-temp.png",
-          price: 249,
-        },
-        {
-          name: "Apple Airpods",
-          imageURL: "https://ss7.vzw.com/is/image/VerizonWireless/apple-airpods-mmef2ama-iset?$device-lg$",
-          price: 159,
-        },
-      ]
+      inventory: []
     }
   }
   
+  componentWillMount() {
+    axios.get('http://localhost:8000/api/products')
+      .then(response => {
+        this.setState({
+          inventory: response.data,
+        });
+      });
+  }
+
   render() {
     return (
       <div className="App">
+        <Header />
         <Dashboard inventoryList={this.state.inventory} />
         <Form />
-        <Header />
       </div>
     );
   }
