@@ -25,9 +25,8 @@ massive(CONNECTION_STRING).then((dbInstance) => {
     console.log('failed')
 });
 
-//Example enpoints
-app.get('/api/products', controller.getAll);
-app.post('/api/products', controller.create);
+//Enpoints
+app.get('/api/shelf/:id', controller.getBins);
 
 //Get server listening on a port
 app.listen(8000, () => {
