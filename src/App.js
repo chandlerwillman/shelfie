@@ -15,8 +15,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="shelf/:id" component={Shelf} />
-          <Route path="add" component={Form} />
+          <Route path="/shelf/:id" component={Shelf} />
+          <Route path="/add" component={Form} />
         </Switch>
       </div>
     );

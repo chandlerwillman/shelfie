@@ -1,1 +1,2 @@
 SELECT * FROM bins
+WHERE id LIKE $1
