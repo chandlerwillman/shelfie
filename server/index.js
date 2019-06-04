@@ -9,9 +9,7 @@ require('dotenv').config();
 const controller = require('./controller');
 
 //Deconstruct variables
-const {
-    CONNECTION_STRING,
-} = process.env;
+const { CONNECTION_STRING } = process.env;
 
 //Middleware
 const app = express();
@@ -19,14 +17,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Database connection
-massive(CONNECTION_STRING).then((dbInstance) => {
-    app.set('db', dbInstance);
-}).catch(() => {
-    console.log('failed')
-});
+massive(CONNECTION_STRING)
+    .then((dbInstance) => {
+        app.set('db', dbInstance);
+        console.log('Database connected successfully');
+    }).catch((err) => {
+        console.log('Database failed to connect:', err);
+    });
 
 //Enpoints
-app.get('/api/shelf/:id', controller.getBins);
+app.get('/api/shelf', controller.getBins);
 
 //Get server listening on a port
 app.listen(8000, () => {

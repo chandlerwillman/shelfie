@@ -5,7 +5,7 @@ import 'bulma/css/bulma.css';
 import Header from './Components/Header/Header';
 import Homepage from './Components/Homepage/Homepage';
 import Shelf from './Components/Shelf/Shelf';
-import Form from './Components/Form/Form';
+import Item from './Components/Item/Item';
 
 class App extends Component {
 
@@ -16,7 +16,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/shelf/:id" component={Shelf} />
-          <Route path="/add" component={Form} />
+          <Route path="/add" component={Item} />
         </Switch>
       </div>
     );

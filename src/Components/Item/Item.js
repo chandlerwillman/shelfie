@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './Item.css';
 
 class Form extends Component {
     state = {
         name: "",
-        price: 0,
+        price: 0.00,
         img: "",
     };
 
@@ -20,31 +21,36 @@ class Form extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={(event) => this.handleSubmit(event)}>
-                    <input 
-                        type="text" 
-                        placeholder="Product Name"
-                        value={this.state.name}
-                        onChange={this.handleNameChange} />
-                    <input 
-                        type="number" 
-                        placeholder="Price"
-                        value={this.state.price}
-                        onChange={this.handlePriceChange} />
-                    <input 
-                        type="text" 
-                        placeholder="Image URL"
-                        value={this.state.img} 
-                        onChange={this.handleImageChange} />
-                    <button 
-                        type= "button"
-                        onClick={this.resetForm}>Cancel</button>
+            <form className="itemForm" onSubmit={(event) => this.handleSubmit(event)}>
+                <div className="field">
+                    <label className="label">Name</label>
+                    <div className="control">
+                        <input 
+                            className="input"
+                            type="text" 
+                            placeholder="Product Name"
+                            value={this.state.name}
+                            onChange={this.handleNameChange} />
+                    </div>
+                </div>
+                <div className="field">
+                    <label className="label">Price</label>
+                    <div className="control">
+                        <input 
+                            className="input"
+                            type="number" 
+                            placeholder="Price"
+                            value={this.state.price}
+                            onChange={this.handlePriceChange} />
+                    </div>
+                </div>
+                <div className="control">
                     <button
+                        className="button is-success"
                         type="submit"
-                        >Add to Inventory</button>
-                </form>
-            </div>
+                        >+ Add to Inventory</button>
+                </div>
+            </form>
         );
     }
 
